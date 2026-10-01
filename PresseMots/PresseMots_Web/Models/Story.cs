@@ -11,22 +11,20 @@ namespace PresseMots.Models
 {
     public class Story : IWordCountable
     {
-
         public Story()
         {
             Likes = new List<Like>();
             Shares = new List<Share>();
             Comments = new List<Comment>();
-
+            StoryTags = new List<StoryTag>(); // Initialisation de la table de correspondance
         }
+
         public int Id { get; set; }
         public string Title { get; set; }
 
         [DataType(DataType.MultilineText)]
         public string Content { get; set; }
 
-        [NotMapped]
-        public IList<string> Tags { get; set; } = new List<string>();
         public DateTime CreationTime { get; set; }
         public DateTime? LastEditTime { get; set; }
         public DateTime? PublishTime { get; set; }
@@ -34,12 +32,13 @@ namespace PresseMots.Models
 
         public virtual User Owner { get; set; }
         public int OwnerId { get; set; }
+
         public virtual IList<Like> Likes { get; set; }
-
         public virtual IList<Share> Shares { get; set; }
-
         public virtual IList<Comment> Comments { get; set; }
 
-
+        // Nouvelle propriété de navigation pour la relation Plusieurs-à-Plusieurs
+        public virtual IList<StoryTag> StoryTags { get; set; }
     }
 }
+
