@@ -17,9 +17,16 @@
                     </div>
                 }
             </div>
-            <div class="card-text" >
-                @Html.DisplayFor(modelItem => item.Content)
+
+            <!-- Étape 14 : Insertion de la vue partielle _Tags dans le card-text -->
+            <div class="card-text">
+                <p>@Html.DisplayFor(modelItem => item.Content)</p>
+
+                <div class="mt-2">
+                    <partial name="_Tags" model="item.StoryTags" />
+                </div>
             </div>
+
             <div class="panel-footer">
 
                 <div class="badge badge-info">
@@ -35,11 +42,15 @@
                 <hr />
                 <a asp-action="Index" asp-route-storyId="@item.Id" asp-controller="Comments">@item.Comments.Where(x => !x.Hidden).Count() commentaire(s)</a> |
                 <a asp-action="Edit" asp-route-id="@item.Id">Modifier</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Supprimer</a>
+                <a asp-action="Delete" asp-route-id="@item.Id">Supprimer</a> |
+
+                <!-- Étape 12 : Lien pour appeler l'action Create de StoryTags -->
+                <a asp-controller="StoryTags" asp-action="Create" asp-route-storyId="@item.Id" class="btn btn-sm btn-primary">Ajouter un tag </a>
+
             </div>
         </div>
     </div>
-    <br/>
+    <br />
 }
 
 <p>

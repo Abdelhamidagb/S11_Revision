@@ -1,0 +1,15 @@
+﻿@model IEnumerable<PresseMots.Models.StoryTag>
+
+@foreach (var storyTag in Model)
+{
+    <span class="badge bg-secondary me-1">
+        @storyTag.Tag.Name
+        <a asp-controller="StoryTags"
+           asp-action="Delete"
+           asp-route-storyId="@storyTag.StoryId"
+           asp-route-tagId="@storyTag.TagId"
+           class="text-danger ms-1 text-decoration-none fw-bold"
+           title="Supprimer ce tag de l'article">X</a>
+    </span>
+}
+
